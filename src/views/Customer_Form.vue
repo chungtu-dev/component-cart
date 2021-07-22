@@ -78,7 +78,7 @@
               <div class="form-group">
                 <div class="cbb_list_dia_chi">
                   <select
-                    @change="getTenThanhPho(form.currentCity)"
+                    @change="onchange(form.currentCity)"
                     v-model="form.currentCity"
                     class="select_context"
                   >
@@ -102,7 +102,7 @@
               <div class="form-group">
                 <div class="cbb_list_dia_chi">
                   <select
-                    @change="getTenXaHuyen(form.currentQuanHuyen)"
+                    @change="onchangeXaHuyen(form.currentQuanHuyen)"
                     v-model="form.currentQuanHuyen"
                     class="select_context"
                   >
@@ -181,7 +181,8 @@
       </form>      
       <span v-else><img class="loadingGif" :src="'https://www.hoteldekhang.biz/wp-content/uploads/2018/07/loading.gif'"/>&emsp;VUI LÒNG ĐỢI...</span>
      </div>      
-     <span v-else>ĐẶT HÀNG THÀNH CÔNG!</span>
+     <span v-else>ĐẶT HÀNG THÀNH CÔNG!<br/>
+       MUA THÊM SẢN PHẨM</span>     
   </div>
 </template>
 
@@ -229,12 +230,12 @@ export default {
       "postDanhSachKhachHang",
     ]),
 
-    getTenThanhPho(selected) {
+    onchange(selected) {
       this.getListQuanHuyen(selected.id);
       console.log(selected.id);
     },
 
-    getTenXaHuyen(selected) {
+    onchangeXaHuyen(selected) {
       this.getListXaHuyen(selected.id);
       console.log(selected.id);
     },
@@ -257,12 +258,15 @@ export default {
 
         otherRequest: form.Yeu_Cau_Khac,
       };
+      // this.postDanhSachKhachHang(requestData);
+      // console.log(requestData);
       this.postDanhSachKhachHang(requestData);
       this.loading = false;      
       setTimeout(() => {   
         this.isShow=false;   
         this.loading = true;
-      },5000);
+        // location.reload();
+      },4000);
     },
   },
 };
